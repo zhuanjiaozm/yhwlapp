@@ -1,0 +1,137 @@
+.conditions > div{
+  margin: 10px 0;
+}
+.conditions>div.typeRadio{
+  margin: 0;
+}
+.conditions>div.row{
+  padding-bottom: 10px;
+  border-bottom: 1px solid #F3F3F3;
+}
+.conditions>.row .btn>span.glyphicon{
+    margin: 5px;
+}
+.solutionList{
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-top: 10px;
+}
+.solutionList>.title{
+  margin: 2px 0;
+}
+.solutionList li{
+  margin: 3px 0;
+}
+.solutionList >.routeList{
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.solutionList >.routeList >li>i.glyphicon{
+  margin: 0 10px;
+}
+.solutionList >.routeList >li>span.price{
+    margin-left: 20px;
+    color: #009DDA;
+}
+.solutionList > .summarize{
+    margin-top: 10px;
+}
+.solutionList>.way{
+  margin-bottom: 10px;
+}
+.solutionList>.way>ul{
+  margin: 0;
+  padding: 0;
+}
+.solutionList>.way>ul>li{
+    list-style: none;
+}
+/*.solutionList>.way>ul>li:nth-child(even){
+    margin-left: 16px;
+    border-left: 2px  dotted gray;
+    padding-left: 10px;
+    font-style: italic;
+    height: 35px;
+    line-height: 35px;
+}
+.solutionList>.way>ul>li:nth-child(even)>span{
+    font-size: 14px;
+    text-decoration: underline;
+    color: #31901A;
+}*/
+.solutionList>.way>ul>li>.startPlaceName i,
+.solutionList>.way>ul>li>.endPlaceName i{
+   color: #31901A;
+}
+.solutionList>.way>ul>li>.priceList{
+    margin-left: 16px;
+    border-left: 2px dotted gray;
+    padding: 7px 0;
+    padding-left: 10px;
+    font-style: italic;
+    /*height: 35px;
+    line-height: 35px;*/
+}
+
+
+
+
+.solutionList .boat{
+    margin: 0;
+    padding: 5px 0;
+}
+.glyphicon{
+  margin: 0 5px;
+}
+.solutionList>.row>.priceList{
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.solutionList >.boat a>span.disabled{
+    color: gray;
+}
+.solutionList >.setOreder{
+  margin-top: 20px;
+}
+.solutionList >.setOreder i{
+  margin-right: 5px;
+}
+.solutionList .col-xs-12.places{
+  margin-bottom: 10px;
+}
+.solutionList .col-xs-12.places i.fa{
+  margin-right: 10px;
+  font-size: 12px;
+}
+span.place{
+  color: #0C1217;
+  margin-right: 10px;
+}
+.solutionList .col-xs-12.places>i.waysFlag{
+  font-size: 18px;
+  font-weight: bold;
+}
+ .fade{
+  opacity: 1;
+
+ }
+
+
+
+.autoComplete ul{
+    position: absolute;
+    z-index: 50;
+    background-color: rgb(238, 238, 238);
+    padding: 0 10px;
+    width: 70%;
+    border: 1px solid #cccccc;
+    border-top: none;
+    border-bottom: none;
+    max-height: 250px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    overflow-y: scroll;
+}
+.autoComplete ul li{
+    line-height: 30px;
+    border-bottom: 1px solid #cccccc;
+}

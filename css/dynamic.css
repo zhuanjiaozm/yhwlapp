@@ -1,0 +1,165 @@
+body{
+	padding-top: 10px;
+	font-family:Tahoma,Arial,Roboto,"Droid Sans","Helvetica Neue","Droid Sans Fallback","Heiti SC",sans-self;
+}
+i.glyphicon,i.fa{
+	margin-right: 5px;
+}
+.title-container>.col-xs-4>strong>i.text-warning{
+	color: rgba(138, 109, 59, 0.6);
+}
+.infomation-list>ul{
+	margin: 10px 0 0;
+	padding: 0;
+	/*width: 95%;*/
+}
+.infomation-list>ul>li{
+	border-bottom: 1px solid rgba(218, 218, 218, 1);
+	list-style: none;
+	padding: 5px;
+	line-height: 25px;
+	height: 85px;
+	color:rgba(72, 68, 68, 0.84);
+	overflow: hidden;
+}
+
+.infomation-list>ul>li:first-child{
+	border-top: 1px solid rgba(218, 218, 218, 1);
+}
+.infomation-list>ul>li span.new-info{
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background-color: #FF3B30;
+	border-radius: 8px;
+	position: relative;
+	top: -8px;
+	margin-right: 10px;
+}
+.road-record i.glyphicon,
+.dynamic i.glyphicon
+{
+	margin: 0 8px;
+}
+.infomation-list .note{
+	height: 75px;
+	display: inline-block;
+	width: 15px;
+	float: left;
+}
+.infomation-list .record{
+	display: flex;
+	float: left;
+	width: 100%;
+	flex-direction:column;
+}
+.infomation-list>ul>li .record>div{
+	height: 25px;
+	width: 100%;
+}
+.infomation-list>ul>li.price{
+	background-color: rgba(189, 189, 236, 0.26);
+}
+.infomation-list>ul>li.pri-record{
+	background-color: rgba(217, 237, 247, 0.53);
+}
+.infomation-list>ul>li.order{
+	background-color: rgba(223, 240, 216, 0.46);
+	height: 110px;
+}
+.infomation-list>ul>li.order .detail{
+	margin-top: 5px;
+	border-top: 1px dashed rgba(218, 218, 218, 0.8);
+}
+
+.detail2 {
+	border-top: 1px dashed rgba(218, 218, 218, 0.8);
+}
+
+
+.infomation-list>ul>li.order .detail>.nodes{
+	margin: 10px 0;
+}
+
+.detail2 > .nodes {
+	margin: 10px 0;
+}
+.infomation-list>ul>li.order .detail>.nodes>div.node{
+	width: 20%;
+	display: inline-block;
+	overflow: hidden;
+	float: left;
+}
+
+.detail2 > .nodes > div.node {
+	width: 20%;
+	display: inline-block;
+	overflow: hidden;
+	float: left;
+}
+
+.infomation-list>ul>li.order .detail>.nodes>div.node>.node-name{
+	color: rgba(88, 84, 84, 0.6);
+    font-size: 11px;
+    font-style: italic;
+}
+
+.detail2 > .nodes > div.node > .node-name {
+	color: rgba(88, 84, 84, 0.6);
+	font-size: 11px;
+	font-style: italic;
+}
+.infomation-list>ul>li.order .detail>.nodes>div.node>.node-icon.done-node{
+	color: #1DA362;
+}
+
+.detail2 > .nodes > div.node > .node-icon.done-node {
+	color: #1DA362;
+}
+.infomation-list>ul>li.order .detail>.nodes>div.node>.node-date{
+	/*font-size: 11px;	*/
+}
+.infomation-list>ul>li.order .detail>.nodes>div.node>.node-date.done-node{
+	color: #1DA362;
+}
+
+.detail2 > .nodes > div.node > .node-date.done-node {
+	color: #1DA362;
+}
+.infomation-list>ul>li.order .dynamic i.done{
+	font-size: 11px;
+}
+
+.dynamic2 i.done {
+	font-size: 13px;
+}
+.icontainer{
+	width: 20%;
+	display: inline-block;
+}
+@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) { 
+    .masked{
+        background-image: -webkit-linear-gradient(left, #3C763D,  #1DA362 50%, #1DA362);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-background-size: 200% 100%;
+        -webkit-animation: masked-animation 2s infinite linear;
+        font-size: 20px;
+        margin: 0 8px;
+        font-weight: bold;
+    }
+    .positioned{
+       animation: position-animation 2s infinite linear;
+        font-size: 20px;
+        margin: 0 8px;
+        font-weight: bold;
+    }
+}
+@-webkit-keyframes masked-animation {
+    0%  { background-position: 0 0;}
+    100% { background-position: -100% 0;}
+}
+@-webkit-keyframes position-animation {
+    0%  { margin-left: -30%;}
+    100% { margin-left: 40%;}
+}

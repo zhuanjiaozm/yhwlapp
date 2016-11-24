@@ -1,0 +1,33 @@
+<div class="autoComplete clearfix">
+<style>
+<!--
+.autoComplete ul{
+    position: absolute;
+    z-index: 50;
+    background-color: rgb(238, 238, 238);
+    padding: 0 10px;
+    width: 70%;
+    border: 1px solid #cccccc;
+    border-top: none;
+    border-bottom: none;
+    max-height: 250px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    overflow-y: scroll;
+}
+.autoComplete ul li{
+    line-height: 30px;
+    border-bottom: 1px solid #cccccc;
+    list-style-type:none;
+}
+-->
+</style>
+<div class="clearfix">	
+	<input type="text" class="form-control" placeholder="{{placeholder}}" ng-change="getData(ngModel)" ng-model="ngModel" ng-blur="toggleShowFlag()" id={{id}} value="{{rvalue}}"/>
+</div>
+<ul class="clearfix" ng-show="resultArray.length">
+	<li style="color:#FFAA00;font-size: 12px"  ng-click="selecetd('')" ng-class="{'selected':selectindex==0}" ng-bind="'清空'" ng-if="clearitem==true"></li>
+	<li ng-repeat="item in resultArray" ng-click="selecetd(item)">
+		{{$index+1}}.{{item.name}}
+	</li>
+</ul>
+</div>

@@ -1,0 +1,38 @@
+/* 
+* @Author: 疯子乔
+* @Date:   2016-11-14 14:42:03
+* @Last Modified by:   Marte
+* @Last Modified time: 2016-11-14 15:46:42
+*/
+body{
+    padding: 5px 0;
+}
+.popover{
+    width: 144px;
+}
+.input-group{
+    margin:5px 0;
+}
+.input-group i.glyphicon{
+    margin-right:5px;
+}
+.operate-btn{
+    margin:10px 0;
+    height: 35px;
+}
+
+.link-man-list{
+    margin:0;
+    padding:0;
+    border-top:1px solid rgba(158, 157, 157, 0.84);
+    margin-top: 10px;
+}
+.link-man-list>li{
+    margin:0;
+    padding:0;
+    list-style: none;
+    border-bottom:1px solid rgba(158, 157, 157, 0.84);
+    width:100%;
+    background-color: rgba(251, 241, 241, 0.82);
+    height:235px;
+}

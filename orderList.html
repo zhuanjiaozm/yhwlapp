@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="app">
+<head>
+<meta charset="utf-8">
+<title>委托单列表</title>
+<meta name="full-screen" content="yes" />
+<meta name="x5-fullscreen" content="true" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="telephone=no" name="format-detection" />
+<meta http-equiv="x-dns-prefetch-control" content="on" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="icon" type="image/x-icon" href="./favicon.ico" />
+<meta name="apple-mobile-web-app-title" content="yeziyuan" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+<link rel="stylesheet" href="./css/common/Font-Awesome/css/font-awesome.min.css">
+<!-- Bootstrap -->
+<link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/oredersList.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style type="text/css">
+#tophovertree{
+	display:block;position:fixed;
+	width:30px;height:30px;right:20px;bottom:20px;cursor:pointer;
+	background-image:url(images/tophovertree.gif);
+	background-size:30px 30px;
+	/*opacity:0.9;*/
+	display:none;
+}
+a{color:blue}
+</style>
+</head>
+<body ng-controller="orderListController">
+<div class="container-fluid">
+<div class="row">
+	<div class="col-xs-12 search">
+		<div class="input-group">
+			<span class="input-group-addon"><!-- ng-click="search()"-->
+				<iclass="glyphicon glyphicon-search"></i>搜索
+			</span>
+			<input type="text" ng-model="busNum" class="form-control" placeholder="请输入委托单号" ng-change="currentPageNo=1;orederList=[];search()">
+		</div>
+	</div>
+	<div class="col-xs-12 resultsList">
+		<ul>
+			<li class="bg-success" ng-repeat="order in orederList">
+				<div class="flag flag-success"><strong>已收1000元</strong></div>
+				<div>No.委托单编号：<span>{{order.busNum}}</span></div>
+				<div><i class="glyphicon glyphicon-log-in"></i>起运地：<span>{{order.startPoint.name}}</span></div>
+				<div><i class="glyphicon glyphicon-stats"></i>收货地：<span>{{order.endPoint.name}}</span></div>
+				<div><i class="glyphicon glyphicon-user"></i>托运人：<span>{{order.enterpriseByShipper.name}}</span></div>
+				<div><i class="glyphicon glyphicon-user"></i>收货人：<span>{{order.enterpriseByConsignee.name}}</span></div>
+				<div class="row">
+					<div class="col-xs-6">应收：<span>{{order.arPrize}}</span></div>
+					<div class="col-xs-6">成本：<span>{{order.allSalePriceAmount}}</span></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">利润：<span>{{order.arPrize-order.allSalePriceAmount}}</span></div>
+					<div class="col-xs-6">订单状态：<span>待配舱</span></div>
+				</div>
+				<div>预报船期：<span>{{order.prediVesselinfo}}</span></div>
+				<div class="row">
+					<div class="col-xs-3" ng-click="eidtOrder(order.id)">
+						<button type="button" class="btn btn-success btn-block btn-sm {{order.status != 0 ? 'am-disabled' : ''}}">
+							<a href="#">修改</a>
+						</button>
+					</div>
+					<div class="col-xs-3">
+						<a href="#" class="btn btn-default btn-block btn-sm" role="button">生成付款码</a>
+					</div>
+					<div class="col-xs-3">
+						<a href="#" class="btn btn-default btn-block btn-sm" role="button">自助付款</a>
+					</div>
+					<div class="col-xs-3">
+						<a href="#" class="btn btn-default btn-block btn-sm" role="button">发给客户</a>
+					</div>
+					<div class="col-xs-3" ng-click="submit(order.id)">
+						<button type="button" class="btn btn-success btn-block btn-sm {{order.status != 0 ? 'am-disabled' : ''}}">
+							<a href="#">提交</a>
+						</button>
+						<!--
+						<a href="#" class="btn btn-success btn-block btn-sm" role="button">提交</a>
+						-->
+					</div>
+					<div class="col-xs-3">
+						<a href="#" class="btn btn-info btn-block btn-sm" role="button">留言</a>
+					</div>
+					<div class="col-xs-3">
+						<a href="#" class="btn btn-warning btn-block btn-sm"role="button"> 账单</a>
+					</div>
+					<div class="col-xs-3" ng-click="toDynamic(order.id)">
+						<a href="#" class="btn btn-primary btn-block btn-sm"role="button"> 动态</a>
+					</div>
+				</div>
+			</li>
+			<li class="bg-success btn btn-block btn-sm" ng-click="currentPageNo=currentPageNo+1;search()"><div>{{hasMoreData ? '加载更多': '没有更多了'}}!</div></li>
+			<!--
+			<li id="returnTop" class="bg-success btn btn-block btn-sm" onclick="goTop();"><div>top</div></li>
+			-->
+		</ul>
+	</div>
+</div>
+</div>
+<span id="tophovertree" title="返回顶部"></span>
+</body>
+<script src="./node_modules/jquery/dist/jquery.js"></script>
+<script src="./node_modules/angular/angular.js"></script>
+<script type="text/javascript" src="js/function/order/orderList.js"></script>
+</html>

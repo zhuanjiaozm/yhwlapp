@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="app">
+<head>
+	<meta charset="utf-8">
+	<title>下单</title>
+	<meta name="full-screen" content="yes" />
+	<meta name="x5-fullscreen" content="true" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="telephone=no" name="format-detection" />
+	<meta http-equiv="x-dns-prefetch-control" content="on" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="icon" type="image/x-icon" href="./favicon.ico" />
+	<meta name="apple-mobile-web-app-title" content="yeziyuan" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+	<link rel="stylesheet" href="./css/common/Font-Awesome/css/font-awesome.min.css">
+	<!-- Bootstrap -->
+	<link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
+	<link href="./css/order.css" rel="stylesheet">
+	<link href="./css/checkThePrice.css" rel="stylesheet">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body ng-controller="orderController">
+	<div class="container-fluid order">
+		<div class="row">
+			<div class="col-xs-12">
+				<a href="./orderList.html" class="btn btn-success btn-block">
+					<i class="glyphicon glyphicon-eye-open"></i>委托单列表>></a>
+			</div>
+			<div class="col-xs-12">
+				<div class="btn-group btn-group-justified">
+				    <a href="" class="btn btn-default {{order.contType == '20GP' ? 'active' : ''}}" role="button" ng-click="order.contType = '20GP'">20GP</a>
+				    <a href="" class="btn btn-default {{order.contType == '40GP' ? 'active' : ''}}" role="button" ng-click="order.contType = '40GP'">40GP</a>
+				    <a href="" class="btn btn-default {{order.contType == '40HQ' ? 'active' : ''}}" role="button" ng-click="order.contType = '40HQ'">40HQ</a>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-tasks"></i>预报船期</span>
+					<!-- <input type="text" class="form-control" placeholder="预报船期"> -->
+					<!-- <input class="Wdate am-form-field am-radius form-control" type="datetime" date-picker
+						date-fmt="yyyy-MM-dd HH:mm:00" min-date="" max-date="" ng-model="order.departureDate"
+						required="required" readonly="readonly" style="display: inline-block;font-size: 12px;cursor:pointer;"> -->
+					<input type="text" class="form-control" placeholder="预报船期" uib-datepicker-popup="yyyy-MM-dd" ng-model="order.prediVesselinfo" is-open="isopen0"  ng-required="true" close-text="关闭" clear-text="清空" alt-input-formats="altInputFormats" ng-click="isopen0=true"/>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i>托运人</span>
+					<!-- <input type="text" class="form-control" placeholder="托运人"> -->
+					<input placeholder="托运人" auto-complete requrl="enterprise/find.do" reqby="name"
+					  	ng-model="order.enterpriseByShipper.name" model-value-as="order.enterpriseByShipper.id" reqattr="id" showattr="name"
+					  	require-clear="true" allow-user-input="true" default-value="true">
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-log-in"></i>起运地</span>
+					<!-- <input type="text" class="form-control" placeholder="起运地"> -->
+					<input placeholder="起运地" auto-complete requrl="door/find.do"
+					  	reqby="name" ng-model="order.startPoint.name" model-value-as="order.startPoint.id"
+					  	reqattr="id" showattr="name" require-clear="true" allow-user-input="false" default-value="true">
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i>收货人</span>
+					<!-- <input type="text" class="form-control" placeholder="收货人"> -->
+					<input placeholder="收货人" auto-complete requrl="enterprise/find.do" reqby="name"
+					  	ng-model="order.enterpriseByConsignee.name" model-value-as="order.enterpriseByConsignee.id" reqattr="id" showattr="name"
+					  	require-clear="true" allow-user-input="false" default-value="true">
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i>收货地</span>
+					<!-- <input type="text" class="form-control" placeholder="收货人"> -->
+					<input placeholder="收货地" auto-complete requrl="door/find.do"
+					  	reqby="name" ng-model="order.endPoint.name" model-value-as="order.endPoint.id"
+					  	reqattr="id" showattr="name" require-clear="true" allow-user-input="false" default-value="true">
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-bookmark"></i>柜量</span>
+					<input type="text" class="form-control" ng-model="order.boxCnt"
+						placeholder="柜量" onkeyup="if(!isPInt(value)){value='';}">
+				</div>
+			</div>
+			<div class="col-xs-8">
+				<div class="input-group">
+				  	<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i>应收单价</span>
+					<input type="text" class="form-control" ng-model="order.arPrize"
+						placeholder="应收单价" onkeyup="if(!isPluses(value)){value='';}">
+				</div>
+			</div>
+			<div class="col-xs-4" popover-placement="left" uib-popover-template="'showSections.html'" popover-append-to-body="true" popover-trigger="mouseenter">
+				<button type="button" class="btn btn-default btn-block">报价明细</button>
+			</div>
+			<div class="col-xs-8">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-tint"></i>成本价</span>
+					<input type="text" class="form-control" ng-model="order.allSalePriceAmount" disabled="disabled">
+				</div>
+			</div>
+			<div class="col-xs-4 text-center">
+				<!--
+				<button type="button" class="btn btn-default btn-block">成本详情</button>
+				 -->
+			</div>
+			<div class="col-xs-8">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i>申请特价</span>
+					<input type="text" class="form-control" placeholder="申请特价" ng-model="order.offerValue" onkeyup="if(!isPluses(value)){value='';}">
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<!-- <input type="text" class="form-control" placeholder="有效期"> -->
+				<input type="text" class="form-control" placeholder="有效期" uib-datepicker-popup="yyyy-MM-dd" ng-model="order.offerExpiryDate" is-open="isopen1"  ng-required="true" close-text="关闭" clear-text="清空" alt-input-formats="altInputFormats" ng-click="isopen1=true"/>
+			</div>
+
+			<div class="col-xs-12">
+				<div class="input-group">
+				  <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i>利润</span>
+				  <input type="text" class="form-control" ng-value="order.arPrize-order.allSalePriceAmount" disabled="disabled">
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="has-warning">
+					<div class="checkbox">
+						<label>
+							<!-- {{order.invoicedStatus == '1' || order.invoicedStatus == '2' ? '<input type="checkbox" checked="checked" value="option1" name="detail">' : '<input type="checkbox" checked="checked" value="option1" name="detail">'}} -->
+							<input type="checkbox" name="detail" ng-model="order.invoicedStatus"/>
+							开发票(发票税率为<strong class="text-danger">6%</strong>,税费<strong class="text-danger">{{order.invoicedStatus ? order.arPrize*0.06: ''}}</strong>元。)
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-tasks"></i>发票头</span>
+					<input type="text" class="form-control" placeholder="发票头" ng-model="order.invoiceTitle" ng-readonly="order.invoicedStatus ? false : true">
+				</div>
+			</div>
+
+			<div class="col-xs-6 text-center" ng-click="save()">
+				<button type="button" class="btn btn-info btn-block">
+				<i class="glyphicon glyphicon-floppy-saved"></i>
+				保存</button>
+			</div>
+			<div class="col-xs-6 text-center" ng-click="order.status=2;save();">
+				<button type="button" class="btn btn-success btn-block">
+				<i class="glyphicon glyphicon-send"></i>
+				提交</button>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="./node_modules/jquery/dist/jquery.js"></script>
+<script src="./node_modules/angular/angular.js"></script>
+<!-- <script src="./node_modules/plugin/My97DatePicker/WdatePicker.js"></script> -->
+<script type="text/javascript" src="./node_modules/angular-animate/angular-animate.min.js"></script>
+<script type="text/javascript" src="./node_modules/angular-touch/angular-touch.min.js">
+<script type="text/javascript" src="./node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+<script type="text/javascript" src="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="./node_modules/angular-i18n/angular-locale_zh-cn.js"></script>
+<script src="./js/function/order/order.js"></script>
+<script src="./js/directives.js"></script>
+<script src="./js/util.js"></script>
+<script type="text/ng-template" id="showSections.html">
+<div class="solutionList">
+<div class="way">
+<ul>
+	<li ng-repeat="place in sections">
+		<div class="startPlaceName">
+			<i class="fa" aria-hidden="true" ng-class="{'DOOR':'fa-truck', 'SHIPPORT':'fa-ship','BARGEPORT':'fa-ship'}[place.fromType]"></i>
+			.{{place.fromName}}.{{place.fromType}}
+		</div>
+		<div class="priceList">
+			<price ng-if="place.price20">20GP:
+				<i class="fa fa-jpy" aria-hidden="true"></i>
+				<strong>{{place.price20}}</strong>，
+			</price>
+			<price ng-if="place.price2X20">2X20GP:
+				<i class="fa fa-jpy" aria-hidden="true"></i>
+				<strong>{{place.price2X20}}</strong>，
+			</price>
+			<price ng-if="place.price40">40GP:
+				<i class="fa fa-jpy" aria-hidden="true"></i>
+				<strong>{{place.price40}}</strong>
+			</price>
+			<price ng-if="place.price40HQ">40HQ:
+				<i class="fa fa-jpy" aria-hidden="true"></i>
+				<strong>{{place.price40HQ}}</strong>
+			</price>
+		</div>
+		<div class="endPlaceName" ng-if="$last">
+			<i class="fa fa-pause-circle-o" aria-hidden="true"></i>.{{place.toName}}
+		</div>
+	</li>
+</ul>
+</div>
+</div>
+</script>
+</html>

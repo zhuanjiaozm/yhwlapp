@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="app">
+<head ng-app="app">
+    <meta charset="utf-8">
+    <title>新增用户</title>
+    <meta name="full-screen" content="yes" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <meta name="apple-mobile-web-app-title" content="yeziyuan" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+    <link rel="stylesheet" href="./css/common/Font-Awesome/css/font-awesome.min.css">
+    <!-- Bootstrap -->
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/addCustomer.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container-fluid  newCustomer" ng-controller="addCustomerCtrl">
+    <form role="form">
+        <div class="col-xs-12 input-group">
+            <span class="input-group-addon">
+                <!-- <i class="glyphicon glyphicon-stats"></i> -->中文名
+            </span>
+            <input type="text"  placeholder="中文名" class="form-control" ng-model="newCustomer.name"/>
+        </div>
+        <div class="col-xs-12 input-group">
+            <span class="input-group-addon">
+                <!-- <i class="glyphicon glyphicon-stats"></i> -->英文名
+            </span>
+            <input type="text"  placeholder="英文名" class="form-control" ng-model="newCustomer.nameEn"/>
+        </div>
+        <div class="col-xs-12 input-group">
+            <span class="input-group-addon">
+                <!-- <i class="glyphicon glyphicon-stats"></i> -->企业性质
+            </span>
+            <select ng-model="newCustomer.nature" class="form-control" ng-options="nature.id as nature.name for nature in natureList"></select>
+        </div>
+        <div class="col-xs-12 input-group">
+            <span class="input-group-addon">
+                <!-- <i class="glyphicon glyphicon-stats"></i> -->开发票
+            </span>
+             <select ng-model="newCustomer.isInvoice" class="form-control" ng-options="isInvoice.id as isInvoice.name for isInvoice in isInvoiceList"></select>
+        </div>
+        <div class="col-xs-12 input-group">
+            <span class="input-group-addon">
+                <!-- <i class="glyphicon glyphicon-stats"></i> -->公司地址
+            </span>
+            <input type="text"  placeholder="公司地址" class="form-control" ng-model="newCustomer.addr"/>
+        </div>
+        <div class="col-xs-12 input-group">
+            <span class="input-group-addon">
+                <!-- <i class="glyphicon glyphicon-stats"></i> -->邮编
+            </span>
+            <input type="text"  placeholder="邮编" class="form-control" ng-model="newCustomer.swiftcode" maxlength="6" />
+        </div>
+        <div class="col-xs-12 input-group">
+            <span class="input-group-addon">
+                <!-- <i class="glyphicon glyphicon-stats"></i> -->网址
+            </span>
+            <input type="url"  placeholder="http://" class="form-control" ng-model="newCustomer.url"/>
+        </div>
+        <div class="operate-btn">
+             <div class="col-xs-6 text-center">
+                 <button type="reset" class="btn btn-default btn-block">清空</button>
+             </div>
+
+             <div class="col-xs-6 text-center">
+                 <button type="button" class="btn btn-success  btn-block" ng-click="save(newCustomer)">保存</button>
+             </div>
+        </div>
+    </form>
+<!--
+        <div class="col-xs-12">
+            {{newCustomer}}
+        </div> -->
+        <div style="line-height:35px;">
+            <strong> 装/卸货地址列表（{{addressList.length}}）：</strong>
+            <i class="fa fa-plus-square pull-right text-success" aria-hidden="true" style="margin-top:10px;" ng-click="addNewAddress()" ng-show="addEable"></i>
+        </div>
+        <div class="clearfix"></div>
+        <ul class="link-man-list">
+            <li ng-repeat="address in addressList">
+                <div class="col-xs-12 input-group">
+                    <span class="input-group-addon">
+                        联系人
+                    </span>
+                    <input type="text"  placeholder="联系人" class="form-control" ng-model="address.contactPerson"/>
+                </div>
+                <div class="col-xs-12 input-group">
+                    <span class="input-group-addon">
+                        手机号
+                    </span>
+                    <input type="text"  placeholder="手机号" class="form-control" ng-model="address.contactCell"/>
+                </div>
+                <div class="col-xs-12 input-group">
+                    <span class="input-group-addon">
+                        <!-- <i class="glyphicon glyphicon-stats"></i> -->装/卸货
+                    </span>
+                    <select ng-model="address.isLoad" class="form-control" ng-options="isLoad.id as isLoad.name for isLoad in isLoadList"></select>
+                </div>
+                <div class="col-xs-12 input-group">
+                    <span class="input-group-addon">
+                        <!-- <i class="glyphicon glyphicon-stats"></i> -->地址
+                    </span>
+                    <input type="text"  placeholder="地址" class="form-control" ng-model="address.addr"/>
+                </div>
+                <div class="col-xs-12 input-group">
+                    <span class="input-group-addon">
+                        <!-- <i class="glyphicon glyphicon-stats"></i> -->说明
+                    </span>
+                    <input type="url"  placeholder="说明" class="form-control" ng-model="address.remark"/>
+                </div>
+                <div class="col-xs-6"></div>
+                <div class="col-xs-3 text-center">
+                    <button uib-popover-template="'myPopoverTemplate.html'" popover-title="确认要删除吗？" type="button" class="btn btn-danger" popover-trigger="'focus'" ng-click="launchPopover(address)">删除</button>
+                </div>
+                <div class="col-xs-3 text-center">
+                    <button type="button" class="btn btn-success btn-block" ng-click="saveNewAddress(address)">保存</button>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="top:50%;margin-top: -135px;">
+        <div class="modal-dialog modal-sm"><div class="modal-content"></div></div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="save-result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top:50%;margin-top: -135px;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">系统提示您</h4>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">我知道了</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/ng-template" id="myPopoverTemplate.html">
+        <div class="form-group" style="margin-bottom: 0">
+            <button type="button" class="btn btn-default">取消</button>
+            <button type="button" class="btn btn-danger" ng-click="deleteAddr()">确认</button>
+        </div>
+    </script>
+
+
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/angular/angular.js"></script>ßßßß
+    <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="./js/addCustomer.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="app">
+
+    <head>
+        <meta charset="utf-8">
+        <title>客户列表</title>
+        <meta name="full-screen" content="yes"/>
+        <meta name="x5-fullscreen" content="true"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="telephone=no" name="format-detection"/>
+        <meta http-equiv="x-dns-prefetch-control" content="on"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <link rel="icon" type="image/x-icon" href="./favicon.ico"/>
+        <meta name="apple-mobile-web-app-title" content="yeziyuan"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+        <link rel="stylesheet" href="./css/common/Font-Awesome/css/font-awesome.min.css">
+        <!-- Bootstrap -->
+        <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/customer.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]> <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script> <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+    </head>
+    <body ng-controller="customerCtrl">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-10 search">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-search"></i>搜索
+                        </span>
+                        <input type="text" class="form-control" placeholder="请输入任意信息检索">
+                    </div>
+                </div>
+                <div class="col-xs-2" style="line-height:35px">
+                    <a href="./addCustomer.html">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <ul class="result">
+                    <li ng-repeat="entErprise in entErprisesList">
+                        <div class="row">
+                            <div class="col-xs-12 title">
+                                企业名称：<strong ng-bind="entErprise.name"></strong>
+                            </div>
+                            <div class="col-xs-12 yingshou">
+                                公司地址：<span ng-bind="entErprise.addr"></span>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+								<div class="col-xs-6">
+									<i class="glyphicon glyphicon-user"></i>
+									<strong>张三丰</strong>
+								</div>
+								<div class="col-xs-6">
+									<i class="glyphicon glyphicon-earphone"></i>
+									<strong>13277081457</strong>
+								</div>
+							</div> -->
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <a href="#" class="btn btn-default  btn-sm btn-block btn-success" role="button">
+                                    <i class="glyphicon glyphicon-list-alt"></i>账单</a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="#" class="btn btn-default btn-block  btn-sm btn-primary" role="button">
+                                    <i class="glyphicon glyphicon-th-list"></i>委托单</a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a ng-href="./addCustomer.html?id={{entErprise.id}}" class="btn btn-default btn-block  btn-sm btn-danger" role="button">
+                                    <i class="glyphicon glyphicon-th-list"></i>编辑</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <a href="#" class="btn btn-default btn-block btn-sm btn-primary" role="button">
+                                    <i class="glyphicon glyphicon-indent-left"></i>联系记录</a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="#" class="btn btn-default btn-block  btn-sm btn-warning" role="button">
+                                    <i class="glyphicon glyphicon-share-alt"></i>推送</a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="#" class="btn btn-default btn-block btn-sm btn-info" role="button">
+                                    <i class="glyphicon glyphicon-compressed"></i>详情</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div infinite-scroll="" infinite-scroll-distance="1"></div>
+        <script src="./node_modules/jquery/dist/jquery.js"></script>
+        <script src="./node_modules/angular/angular.js"></script>
+        <script src="./js/customer.js"></script>
+    </body>
+</html>

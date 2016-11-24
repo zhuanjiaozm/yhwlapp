@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<title>查价</title>
+		<meta name="full-screen" content="yes" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="telephone=no" name="format-detection" />
+		<meta http-equiv="x-dns-prefetch-control" content="on" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="icon" type="image/x-icon" href="./favicon.ico" />
+		<meta name="apple-mobile-web-app-title" content="yeziyuan" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+		<link rel="stylesheet" href="./css/common/Font-Awesome/css/font-awesome.min.css">
+		<!-- Bootstrap -->
+		<link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="./css/checkThePrice.css" rel="stylesheet">
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+	      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	</head>
+
+	<body ng-controller="WelcomeController">
+		<div class="container-fluid">
+			<div class="conditions">
+				<div class="input-group">
+					<span class="input-group-addon">
+                        <i class="glyphicon glyphicon-share-alt"></i>起运地
+					</span>
+					<input placeholder="请选择起运地" auto-complete requrl="door/find.do" reqby="name"  ng-model="req.startDoorName" model-value-as="req.startDoorId" reqattr="id" showattr="name" require-clear="false" allow-user-input="false">
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon bg-success">
+                        <i class="glyphicon glyphicon-save"></i>目的地
+					</span>
+					<input placeholder="请选择目的地" auto-complete requrl="door/find.do" reqby="name"  ng-model="req.endDoorName" showattr="name" reqattr="id" require-clear="false" allow-user-input="false" model-value-as="req.endDoorId">
+				</div>
+				<div class="row">
+					<div class="col-xs-6">
+						<button type="submit" class="btn btn-default  btn-block" ng-click="reset()">
+                                <span class="glyphicon glyphicon-repeat"></span>清空
+                          </button>
+					</div>
+					<div class="col-xs-6">
+						<button type="submit" class="btn btn-success  btn-block" ng-click="checkPrice()">
+                                <span class="glyphicon glyphicon-ok"></span>查询
+                          </button>
+					</div>
+				</div>
+				<div class="result">
+					<div class="btn-group">
+						<button type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-send"></span>
+                            最快
+                        </button>
+						<button type="button" class="btn btn-default">
+                          	<span class="glyphicon glyphicon-usd"></span>
+                          	最早
+                        </button>
+						<!-- <button type="button" class="btn btn-default">
+                          	<span class="glyphicon glyphicon-lock"></span>
+                          	最优
+                        </button> -->
+					</div>
+					<div class="solutionList routeResultArrayNull" ng-if="routeResultArrayNull">
+						<span>暂时无<b ng-bind="req.startDoorName"  class="text-danger"></b>到<b ng-bind="req.endDoorName"  class="text-danger"></b>的价格查询结果。</span>
+					</div>
+					<div class="solutionList"  ng-repeat="result in routeResultArray" ng-init="reslult.showay=false">
+						<div class="row">
+							<div class="col-xs-6  title">
+								<strong>方案{{$index+1}}</strong><i>({{$index+1}}/{{routeResultArray.length}})</i>
+							</div>
+							<div class="col-xs-6 text-right" ng-if="result.totalHour">
+								总耗时：<strong class="text-success" ng-bind="result.totalHour"></strong>
+							</div>
+							<div class="col-xs-12 priceList">
+								不含税总价：
+								<div>
+									<ul>
+										<li ng-if="result.totalPrice20">
+											20GP：<i class="fa fa-jpy" aria-hidden="true"></i>
+											<strong class="text-danger" ng-bind="result.totalPrice20"></strong>
+										</li>
+										<li ng-if="result.totalPrice2X20">
+											2X20GP：<i class="fa fa-jpy" aria-hidden="true"></i>
+											<strong class="text-danger" ng-bind="result.totalPrice2X20"></strong>
+										</li>
+										<li ng-if="result.totalPrice40">
+											40GP：<i class="fa fa-jpy" aria-hidden="true"></i>
+											<strong class="text-danger" ng-bind="result.totalPrice40"></strong>
+										</li>
+										<li ng-if="result.totalPrice40HQ">
+											40HQ：<i class="fa fa-jpy" aria-hidden="true"></i>
+											<strong class="text-danger" ng-bind="result.totalPrice40HQ"></strong>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-xs-12 places"  ng-click="reslult.showay=!reslult.showay">
+								<i class="fa fa-caret-down text-danger waysFlag" aria-hidden="true"></i>
+								<!-- <i class="fa fa-align-center text-success" aria-hidden="true"></i> -->
+								<place ng-repeat="place in result.sections">
+									<span class="place"  ng-bind="place.fromName" ></span>
+									<i class="fa fa-angle-double-right" aria-hidden="true" ></i>
+									<span class="place"  ng-bind="place.toName" ng-if="$last"></span>
+								</place>
+
+							</div>
+						</div>
+						<div class="way" ng-show="reslult.showay">
+							<ul>
+								<li ng-repeat="place in result.sections">
+									<div class="startPlaceName">
+	<i class="fa" aria-hidden="true"
+	ng-class="{'DOOR':'fa-truck', 'SHIPPORT':'fa-ship','BARGEPORT':'fa-ship'}[place.fromType]"></i>.{{place.fromName}}.{{place.fromType}}
+									</div>
+									<div class="priceList">
+										<price ng-if="place.price20">20GP:
+											<i class="fa fa-jpy" aria-hidden="true"></i>
+											<strong>{{place.price20}}</strong>，
+										</price>
+										<price ng-if="place.price2X20">2X20GP:
+											<i class="fa fa-jpy" aria-hidden="true"></i>
+											<strong>{{place.price2X20}}</strong>，
+										</price>
+										<price ng-if="place.price40">40GP:
+											<i class="fa fa-jpy" aria-hidden="true"></i>
+											<strong>{{place.price40}}</strong>
+										</price>
+										<price ng-if="place.price40HQ">40HQ:
+											<i class="fa fa-jpy" aria-hidden="true"></i>
+											<strong>{{place.price40HQ}}</strong>
+										</price>
+									</div>
+									<div class="endPlaceName" ng-if="$last">
+										<i class="fa fa-pause-circle-o" aria-hidden="true"></i>.{{place.toName}}
+									</div>
+								</li>
+							</ul>
+
+						</div>
+						<div  class="row boat bg-warning" ng-if="!result.vesselVoyageResult||result.vesselVoyageResult.length==0">
+							<i>当前解决方案未查询相关船期</i>
+						</div>
+						<div class="row boat bg-warning"  ng-init="curindex=0" ng-if="result.vesselVoyageResult.length>0"><!-- {{$index==curindex}}其中：$index={{$index}},curindex={{curindex}} -->
+							<div class="col-xs-6 text-center">
+								船期：{{result.vesselVoyageResult[curindex].VOYAGEINFO_NO}}
+							</div>
+							<div class="col-xs-6 text-center">
+								舱量：{{result.vesselVoyageResult[curindex].SHIP_SPACE_COUNT}}
+							</div>
+							<div class="col-xs-12 text-center">
+								时间：{{result.vesselVoyageResult[curindex].ETA}}<i class="glyphicon glyphicon-arrow-right text-danger"></i>{{result.vesselVoyageResult[curindex].ETD}}
+							</div>
+							<div class="col-xs-6 text-center">
+
+							</div>
+							<div class="col-xs-6 text-center" >
+								<span class="glyphicon glyphicon-chevron-left disabled" ng-click="curindex=curindex>0?curindex-1:curindex"></span>
+								<strong class="text-success">{{curindex+1}}</strong>/{{result.vesselVoyageResult.length}}
+								<span class="glyphicon glyphicon-chevron-right" ng-click="curindex=curindex<result.vesselVoyageResult.length?curindex+1:curindex"  ></span>
+
+
+							</div>
+						</div>
+					<!-- 	<div class="row summarize">
+							<div class="col-xs-6 text-center">
+								总耗时：<strong class="text-success">17小时</strong>
+							</div>
+							<div class="col-xs-6 text-center">
+								总价：<strong class="text-success">7000元</strong>
+							</div>
+						</div> -->
+						<div class="row setOreder">
+							<div class="col-xs-6">
+								<button type="button" class="btn btn-warning btn-block"><i class="glyphicon glyphicon-earphone"></i>客服</button>
+							</div>
+							<div class="col-xs-6">
+								<a class="btn btn-success btn-block" href="order.html?startPointId={{req.startDoorId}}&endPointId={{req.endDoorId}}"><i class="glyphicon glyphicon-ok"></i>下单</a>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="solutionList">
+						<div class="row title">
+							<div class="col-xs-12">
+								<strong>方案二</strong><i>(2/5)</i>
+							</div>
+						</div>
+						<ol class="routeList">
+							<li>
+								门点A <i class="glyphicon glyphicon-arrow-right text-danger"></i>新会西河口码头
+								<span class="price">800元</span>
+							</li>
+							<li>
+								新会西河口码头 <i class="glyphicon glyphicon-arrow-right text-danger"></i>大连港(大窑湾码头)
+								<span class="price">800元</span>
+							</li>
+							<li>
+								大连港(大窑湾码头) <i class="glyphicon glyphicon-arrow-right text-danger"></i>蛇口港(招港码头)
+								<span class="price">800元</span>
+							</li>
+							<li>
+								蛇口港(招港码头) <i class="glyphicon glyphicon-arrow-right text-danger"></i>秦皇岛(秦皇岛码头)
+								<span class="price">800元</span>
+							</li>
+							<li>
+								秦皇岛(秦皇岛码头) <i class="glyphicon glyphicon-arrow-right text-danger"></i>常州录安洲长江码头有限公司
+								<span class="price">800元</span>
+							</li>
+						</ol>
+						<div class="row boat bg-warning">
+							<div class="col-xs-6 text-center">
+								船期：VS4545755
+							</div>
+							<div class="col-xs-6 text-center">
+								舱量：125
+							</div>
+							<div class="col-xs-12 text-center">
+								时间：2016-09-25 9时<i class="glyphicon glyphicon-arrow-right text-danger"></i>2016-09-27 13时
+							</div>
+							<div class="col-xs-6 text-center">
+
+							</div>
+							<div class="col-xs-6 text-center">
+								<a href="#">
+									<span class="glyphicon glyphicon-chevron-left disabled"></span>
+								</a>
+								<strong class="text-success">1</strong>/4
+								<a href="#">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+							</div>
+						</div>
+						<div class="row summarize">
+							<div class="col-xs-6 text-center">
+								总耗时：<strong class="text-success">17小时</strong>
+							</div>
+							<div class="col-xs-6 text-center">
+								总价：<strong class="text-success">7000元</strong>
+							</div>
+						</div>
+						<div class="row setOreder">
+							<div class="col-xs-6">
+								<button type="button" class="btn btn-warning btn-block"><i class="glyphicon glyphicon-earphone"></i>客服</button>
+							</div>
+							<div class="col-xs-6">
+								<button type="button" class="btn btn-success btn-block"><i class="glyphicon glyphicon-ok"></i>下单</button>
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modal">
+
+		<div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title">提示</h4>
+		      </div>
+		      <div class="modal-body">
+		       请输入<span class="text-danger">起运地</span>或者<span class="text-danger">目的地</span>后查询！
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">知道了</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="./node_modules/angular/angular.js"></script>
+		<script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./js/checkThePrice.js"></script>
+	</body>
+</html>

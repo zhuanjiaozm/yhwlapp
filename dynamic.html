@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="app">
+
+    <head>
+        <meta charset="utf-8">
+        <title>动态</title>
+        <title>Bootstrap 101 Template</title>
+        <meta name="full-screen" content="yes"/>
+        <meta name="x5-fullscreen" content="true"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="telephone=no" name="format-detection"/>
+        <meta http-equiv="x-dns-prefetch-control" content="on"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <link rel="icon" type="image/x-icon" href="./favicon.ico"/>
+        <meta name="apple-mobile-web-app-title" content="yeziyuan"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+        <link rel="stylesheet" href="./bower_components/Font-Awesome/css/font-awesome.min.css">
+        <!-- Bootstrap -->
+        <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/dynamic.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]> <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script> <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> <![endif]-->
+    </head>
+
+    <body ng-controller="dynamicNoticeCtrl">
+        <!-- <i class="glyphicon glyphicon-arrow-right masked" style="font-size: 150px;font-weight: bold;"></i> -->
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-6" style="width: 100%;">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="search()">搜索</button>
+                        </span>
+                        <input type="text" class="form-control" placeholder="请输入委托单号..." ng-model="businessNo">
+                    </div>
+                    <!-- /input-group -->
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+            <div class="infomation-list">
+                <ul>
+                    <li class="row price">
+                        <div class="note">
+                            <span class="new-info"></span>
+                        </div>
+                        <div class="record row">
+                            <div class="title-container">
+                                <div class="col-xs-4">
+                                    <strong>
+                                        <i class="text-warning">价格提醒</i>
+                                    </strong>
+                                </div>
+                                <div class="col-xs-8">
+                                    <small>
+                                        <i class="glyphicon glyphicon-dashboard"></i>2016/10/12</small>
+                                </div>
+                            </div>
+                            <div class="road-record">
+                                <div class="col-xs-12">
+                                    <span class="text-success">顺德勒流码头</span>
+                                    <i class="glyphicon glyphicon-arrow-right"></i>
+                                    <span class="text-success">梧州港(李家庄码头)</span>
+                                </div>
+                            </div>
+
+                            <div class="price-record">
+                                <div class="col-xs-12">
+                                    <i class="glyphicon glyphicon-bell text-success"></i>
+                                    <strong class="text-danger">800</strong>元变更为<strong class="text-danger">820</strong>元
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="row pri-record">
+                        <div class="note">
+                            <span class="new-info"></span>
+                        </div>
+                        <div class="record row">
+                            <div class="title-container">
+                                <div class="col-xs-4">
+                                    <strong>
+                                        <i class="text-warning">报价记录</i>
+                                    </strong>
+                                </div>
+                                <div class="col-xs-8">
+                                    <small>
+                                        <i class="glyphicon glyphicon-dashboard"></i>2016/10/12</small>
+                                </div>
+                            </div>
+                            <div class="road-record">
+                                <div class="col-xs-12">
+                                    <span class="text-success">泉州港(肖厝码头)</span>
+                                    <i class="glyphicon glyphicon-arrow-right"></i>
+                                    <span class="text-success">广西南宁横县马岭镇</span>
+                                </div>
+                            </div>
+
+                            <div class="price-record">
+                                <div class="col-xs-12">
+                                    <i class="glyphicon glyphicon-bell text-success"></i>
+                                    <strong class="text-danger">张三丰</strong>报250元,<strong class="text-danger">20GP</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="row pri-record">
+                        <div class="note"></div>
+                        <div class="record row">
+                            <div class="title-container">
+                                <div class="col-xs-4">
+                                    <strong>
+                                        <i class="text-warning">报价记录</i>
+                                    </strong>
+                                </div>
+                                <div class="col-xs-8">
+                                    <small>
+                                        <i class="glyphicon glyphicon-dashboard"></i>2016/10/12</small>
+                                </div>
+                            </div>
+                            <div class="road-record">
+                                <div class="col-xs-12">
+                                    <span class="text-success">泉州港(肖厝码头)</span>
+                                    <i class="glyphicon glyphicon-arrow-right"></i>
+                                    <span class="text-success">广西南宁横县马岭镇</span>
+                                </div>
+                            </div>
+
+                            <div class="price-record">
+                                <div class="col-xs-12">
+                                    <i class="glyphicon glyphicon-bell text-success"></i>
+                                    <strong class="text-danger">张三丰</strong>报250元,<strong class="text-danger">20GP</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <div align="center" style="margin-left: -20px;margin-right: -20px;background-color: rgba(125, 144, 40, 0.13);">货物动态
+                </div>
+
+                <div id="accordion" ng-repeat="item in dynamicDatas">
+                    <div class="panel panel-default" style="height: 145px;background-color: rgba(223, 240, 216, 0.46);border-bottom: none;padding-top: 15px;margin: 0px -20px 0px;">
+                        <div class="note"></div>
+                        <div class="record row" style="border: solid 1px transparent;" data-toggle="collapse" data-target="#{{item.businessNo}}" data-parent="#accordion">
+                            <div class="title-container">
+                                <div class="col-xs-6">
+                                    <strong>
+                                        <i class="text-warning">{{item.businessNo}}</i>
+                                    </strong>
+                                </div>
+                                <div class="col-xs-6">
+                                    <small>
+                                        <i class="glyphicon glyphicon-dashboard"></i>{{item.createTime}}</small>
+                                </div>
+                                <!--<div class="col-xs-1">
+							<i class="fa fa-chevron-down text-success" aria-hidden="true"></i>
+						</div>-->
+                            </div>
+                            <div class="price-record">
+                                <div class="col-xs-12" style="margin-top: 5px">
+                                    <i class="glyphicon glyphicon-user text-success"></i>
+                                    <strong class="text-danger">{{item.bkVslcorpName}}</strong>
+                                </div>
+                            </div>
+                            <div class="road-record">
+                                <!--货代，有大船-->
+                                <div class="col-xs-12" style="margin-top: 5px" ng-if="item.businessTypeId==10001">
+                                    <span class="text-success">{{item.depPortName}}</span>
+                                    <i class="glyphicon glyphicon-arrow-right"></i>
+                                    <span class="text-success">{{item.desPortName}}</span>
+                                </div>
+
+                                <!--驳船-->
+                                <div class="col-xs-12" style="margin-top: 5px" ng-if="item.businessTypeId==10004">
+                                    <span class="text-success">{{item.bargeDepPortName}}</span>
+                                    <i class="glyphicon glyphicon-arrow-right"></i>
+                                    <span class="text-success">{{item.bargeDesPortName}}</span>
+                                </div>
+                            </div>
+                            <div class="dynamic2" style="margin-top: 5px;">
+
+                                <!--驳船-->
+                                <div class="col-xs-6 text-center" ng-if="item.currentNode>=13&&item.currentNode<25&&item.businessTypeId==10004">
+                                    <i class="done">起驳船</i>
+                                    <div class="icontainer">
+                                        <i class="fa fa-long-arrow-right masked positioned" aria-hidden="true"></i>
+                                    </div>
+                                    <strong class="text-success">达驳抵港</strong>
+                                </div>
+
+                                <div class="col-xs-6 text-center" ng-if="item.currentNode>=25&&item.currentNode<30">
+                                    <i class="done">达驳船</i>
+                                    <div class="icontainer">
+                                        <i class="fa fa-long-arrow-right masked positioned" aria-hidden="true"></i>
+                                    </div>
+                                    <strong class="text-success">卸货</strong>
+                                </div>
+
+                                <div class="col-xs-6 text-center" ng-if="item.currentNode>=30">
+                                    <strong class="text-success">已卸货</strong>
+                                    <div class="icontainer">
+                                        <i class="fa fa-long-arrow-right masked positioned" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <i class="done">上传</i>
+                                    <div class="icontainer">
+                                        <i class="fa fa-long-arrow-right masked positioned" aria-hidden="true"></i>
+                                    </div>
+                                    <strong class="text-success">签收</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="{{item.businessNo}}" class="panel-collapse collapse" style="background: rgba(239, 240, 206, 0.46);margin-left: -15px;margin-right: -15px;padding-top: -10px">
+                        <div class="panel-body" style="padding: 0px;">
+
+                            <div class="detail2" style="padding-top: 5px;">
+                                <div class="col-xs-12">
+                                    <i class="fa fa-user" aria-hidden="true"></i>托运人：
+                                    <strong>{{item.shipper}}</strong>
+                                </div>
+                                <div class="col-xs-12">
+                                    <i class="fa fa-user-plus" aria-hidden="true"></i>收货人：
+                                    <strong>{{item.consignee}}</strong>
+                                </div>
+                                <div class="col-xs-12">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>预报船期:
+                                    <strong>{{item.prediVesselinfo}}</strong>
+                                </div>
+                                <div class="col-xs-6">
+                                    应收：<span class="info">1900元</span>
+                                </div>
+                                <div class="col-xs-6">
+                                    利润：<span class="info">400元</span>
+                                </div>
+                                {{item.currentNode}}
+                                <div class="col-xs-12 nodes">
+                                    <div class="text-center node">
+                                        <div class="node-name">
+                                            装货
+                                        </div>
+                                        <div style="font-size: 14px" ng-class="item.loadLinStatus==null||item.loadLinStatus==0?'node-icon':'node-icon done-node'">
+                                            <i aria-hidden="true" ng-class="item.currentNode>=7&&item.currentNode<13?'fa fa-truck masked':'fa fa-truck'"></i>
+                                        </div>
+                                        <div class="node-date done-node">
+                                            09/30
+                                        </div>
+                                    </div>
+                                    <div class="text-center node">
+                                        <div class="node-name">
+                                            起驳船
+                                        </div>
+                                        <div style="font-size: 18px" ng-class="item.pbarWbaStatus==null||item.pbarWbaStatus==0?'node-icon':'node-icon done-node'">
+                                            <i ng-class="item.currentNode>=13&&item.currentNode<17?'fa fa-ship masked':'fa fa-ship'" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="node-date done-node">
+                                            10/01
+                                        </div>
+                                    </div>
+                                    <div class="text-center node">
+                                        <div class="node-name">
+                                            大船
+                                        </div>
+                                        <div ng-class="item.shipStoStatus==null||item.shipStoStatus==0?'node-icon':'node-icon done-node'" style="font-size: 22px">
+                                            <i ng-class="item.currentNode>=17&&item.currentNode<25?'fa fa-ship masked':'fa fa-ship'" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="node-date">
+                                            10/03
+                                        </div>
+                                    </div>
+                                    <div class="text-center node">
+                                        <div class="node-name">
+                                            达驳船
+                                        </div>
+                                        <div ng-class="item.sbarEtaStatus==null||item.sbarEtaStatus==0?'node-icon':'node-icon done-node'" style="font-size: 18px">
+                                            <i ng-class="item.currentNode>=25&&item.currentNode<30?'fa fa-ship masked':'fa fa-ship'" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="node-date">
+                                            10/7
+                                        </div>
+                                    </div>
+                                    <div class="text-center node">
+                                        <div class="node-name">
+                                            卸货
+                                        </div>
+                                        <div ng-class="item.unloUnlStatus==null||item.unloUnlStatus==0?'node-icon':'node-icon done-node'" style="font-size: 14px">
+                                            <i ng-class="item.currentNode==30?'fa fa-truck masked':'fa fa-truck'" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="node-date">
+                                            10/11
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 nodes">
+                                    <div class="text-center node">
+                                        <div class="node-name">
+                                            办单
+                                        </div>
+                                        <div class="node-icon done-node" style="font-size: 18px">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </div>
+                                        <div class="node-date done-node">
+                                            09/28
+                                        </div>
+                                    </div>
+                                    <div class="text-center node">
+                                        <div class="node-name">
+                                            随车
+                                        </div>
+                                        <div class="node-icon done-node" style="font-size: 18px">
+                                            <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="node-date done-node">
+                                            09/29
+                                        </div>
+                                    </div>
+                                    <div class="text-center node">
+                                        <div class="node-name">
+                                            上传
+                                        </div>
+                                        <div class="node-icon done-node" style="font-size: 18px">
+                                            <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="node-date done-node">
+                                            10/01
+                                        </div>
+                                    </div>
+                                    <div class="text-center node">
+                                        <div class="node-name done-node">
+                                            签收
+                                        </div>
+                                        <div class="node-icon" style="font-size: 18px">
+                                            <i class="fa fa-indent masked" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="node-date">
+                                            10/11
+                                        </div>
+                                    </div>
+                                    <div class="text-center node">
+                                        <div class="node-name">
+                                            回收
+                                        </div>
+                                        <div class="node-icon" style="font-size: 18px">
+                                            <i class="fa fa-undo" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="node-date">
+                                            10/17
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div align="center" style="color: #ff885c;font-weight: 700;margin-left: -20px;margin-right: -20px;background-color: rgba(125, 144, 40, 0.13);" ng-cloak>
+                    {{hasDatas?'':'搜索不到与您相关的数据！'}}
+                </div>
+
+                <!--源代码-->
+                <!--	<ul>
+				<li class="row order">
+					<div class="note">
+
+					</div>
+					<div class="record row">
+						<div class="title-container">
+							<div class="col-xs-4">
+								<strong><i class="text-warning">货物动态</i></strong>
+							</div>
+							<div class="col-xs-6">
+								<small><i class="glyphicon glyphicon-dashboard"></i>2016/10/12</small>
+							</div>
+							<div class="col-xs-1">
+								<i class="fa fa-chevron-down text-success" aria-hidden="true"></i>
+							</div>
+						</div>
+						<div class="price-record">
+							<div class="col-xs-12">
+								<i class="glyphicon glyphicon-user text-success"></i>
+								<strong class="text-danger">爱和陶陶瓷有限公司</strong>
+							</div>
+						</div>
+						<div class="road-record">
+							<div class="col-xs-12">
+								<span class="text-success">泉州港(肖厝码头)</span><i
+									class="glyphicon glyphicon-arrow-right"></i><span class="text-success">广西南宁横县马岭镇</span>
+							</div>
+						</div>
+						<div class="dynamic">
+							<div class="col-xs-6 text-center">
+								<i class="done">起驳船</i>
+								<div class="icontainer">
+									<i class="fa fa-long-arrow-right masked positioned" aria-hidden="true"></i>
+								</div>
+								<strong class="text-success">大船</strong>
+							</div>
+							<div class="col-xs-6 text-center">
+								<i class="done">上传</i>
+								<div class="icontainer">
+									<i class="fa fa-long-arrow-right masked positioned" aria-hidden="true"></i>
+								</div>
+								<strong class="text-success">签收</strong>
+							</div>
+						</div>
+						<div class="detail">
+							<div class="col-xs-12">
+								<i class="fa fa-user" aria-hidden="true"></i>托运人：
+								<strong>爱和陶陶瓷有限公司</strong>
+							</div>
+							<div class="col-xs-12">
+								<i class="fa fa-user-plus" aria-hidden="true"></i>收货人：
+								<strong>张三丰</strong>
+							</div>
+							<div class="col-xs-12">
+								<i class="fa fa-calendar" aria-hidden="true"></i>预报船期:
+								<strong>2016-09-30</strong>
+							</div>
+							<div class="col-xs-6">
+								应收：<span class="info">1900元</span>
+							</div>
+							<div class="col-xs-6">
+								利润：<span class="info">400元</span>
+							</div>
+							<div class="col-xs-12 nodes">
+								<div class="text-center node">
+									<div class="node-name">
+										装货
+									</div>
+									<div class="node-icon done-node" style="font-size: 14px">
+										<i class="fa fa-truck" aria-hidden="true"></i>
+									</div>
+									<div class="node-date done-node">
+										09/30
+									</div>
+								</div>
+								<div class="text-center node">
+									<div class="node-name">
+										起驳船
+									</div>
+									<div class="node-icon done-node" style="font-size: 18px">
+										<i class="fa fa-ship " aria-hidden="true"></i>
+									</div>
+									<div class="node-date done-node">
+										10/01
+									</div>
+								</div>
+								<div class="text-center node">
+									<div class="node-name">
+										大船
+									</div>
+									<div class="node-icon" style="font-size: 22px">
+										<i class="fa fa-ship masked" aria-hidden="true"></i>
+									</div>
+									<div class="node-date">
+										10/03
+									</div>
+								</div>
+								<div class="text-center node">
+									<div class="node-name">
+										达驳船
+									</div>
+									<div class="node-icon" style="font-size: 18px">
+										<i class="fa fa-ship" aria-hidden="true"></i>
+									</div>
+									<div class="node-date">
+										10/7
+									</div>
+								</div>
+								<div class="text-center node">
+									<div class="node-name">
+										卸货
+									</div>
+									<div class="node-icon" style="font-size: 14px">
+										<i class="fa fa-truck" aria-hidden="true"></i>
+									</div>
+									<div class="node-date">
+										10/11
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 nodes">
+								<div class="text-center node">
+									<div class="node-name">
+										办单
+									</div>
+									<div class="node-icon done-node" style="font-size: 18px">
+										<i class="glyphicon glyphicon-pencil"></i>
+									</div>
+									<div class="node-date done-node">
+										09/28
+									</div>
+								</div>
+								<div class="text-center node">
+									<div class="node-name">
+										随车
+									</div>
+									<div class="node-icon done-node" style="font-size: 18px">
+										<i class="fa fa-file-image-o" aria-hidden="true"></i>
+									</div>
+									<div class="node-date done-node">
+										09/29
+									</div>
+								</div>
+								<div class="text-center node">
+									<div class="node-name">
+										上传
+									</div>
+									<div class="node-icon done-node" style="font-size: 18px">
+										<i class="fa fa-cloud-upload" aria-hidden="true"></i>
+									</div>
+									<div class="node-date done-node">
+										10/01
+									</div>
+								</div>
+								<div class="text-center node">
+									<div class="node-name done-node">
+										签收
+									</div>
+									<div class="node-icon" style="font-size: 18px">
+										<i class="fa fa-indent masked" aria-hidden="true"></i>
+									</div>
+									<div class="node-date">
+										10/11
+									</div>
+								</div>
+								<div class="text-center node">
+									<div class="node-name">
+										回收
+									</div>
+									<div class="node-icon" style="font-size: 18px">
+										<i class="fa fa-undo" aria-hidden="true"></i>
+									</div>
+									<div class="node-date">
+										10/17
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>-->
+
+            </div>
+        </div>
+        <script src="./node_modules/jquery/dist/jquery.js"></script>
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="./node_modules/angular/angular.js"></script>
+        <script src="js/function/dynamicNotice/dynamicNotice.js"></script>
+        <script type="text/javascript">
+            /*$(document).ready(function () {
+	 $(".infomation-list>ul>li.order").click(function () {
+	 $(this).stop();
+	 $(".infomation-list>ul>li.order .title-container .col-xs-1 i").toggleClass("fa-chevron-down").toggleClass(
+	 "fa-chevron-up");
+	 if ($(this).attr("flag") === "on") {
+	 $(this).animate({
+	 height: '110px'
+	 }, 500);
+	 $(this).attr("flag", "off");
+	 } else {
+	 $('html,body').animate({scrollTop: $(this).offset().top}, 500);//定位到该位置
+	 $(this).animate({
+	 height: '400px'
+	 }, 500);
+	 $(this).attr("flag", "on");
+	 }
+	 });
+	 });*/
+        </script>
+    </body>
+
+</html>

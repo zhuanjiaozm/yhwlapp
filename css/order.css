@@ -1,0 +1,19 @@
+.order>.row>div.col-xs-12, .order>.row>div.col-xs-8, .order>.row>div.col-xs-4, .order>.row>div.col-xs-6 {
+    margin: 3px 0;
+}
+
+.order>.row>div.col-xs-12>.input-group {
+    width: 100%;
+}
+
+.order>.row>div.col-xs-12 i, .order>.row>div.col-xs-6 i, .order>.row>div.col-xs-8 i {
+    margin-right: 5px;
+}
+
+.order>.row>div.col-xs-12>.input-group>span.input-group-addon, .order>.row>div.col-xs-8>.input-group>span.input-group-addon {
+    width: 101px;
+}
+
+.detail {
+    display: none;
+}
